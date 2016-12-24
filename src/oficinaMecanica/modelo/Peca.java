@@ -1,5 +1,6 @@
 package oficinaMecanica.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +24,8 @@ public class Peca {
 	private String tipo;
 	@NotEmpty(message = "A marca deve ser informada")
 	private String marca;
-	@NotEmpty(message = "A quantidade deve ser informada")
-	private int quantidade;
+	@Column(nullable = false)
+	private Integer quantidade;
 	
 	//getters and setters
 	public Long getId() {
@@ -57,10 +58,10 @@ public class Peca {
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 }
