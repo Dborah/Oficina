@@ -1,4 +1,4 @@
-package deborah.com.mb;
+package oficinaMecanica.mb;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import deborah.com.dao.DAO;
-import deborah.com.modelo.Cliente;
+import oficinaMecanica.dao.DAO;
+import oficinaMecanica.modelo.Cliente;
 
 @SessionScoped
 @ManagedBean
@@ -47,7 +47,7 @@ public class ClienteBean {
 			dao.remove(cliente);
 			clientes = dao.listaTodos();
 		}catch(Exception e){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este cliente não pode ser removido."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este cliente nï¿½o pode ser removido."));
 		}
 	}
 	

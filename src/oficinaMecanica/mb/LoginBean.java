@@ -1,12 +1,12 @@
-package deborah.com.mb;
+package oficinaMecanica.mb;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import deborah.com.dao.UsuarioDAO;
-import deborah.com.modelo.Usuario;
+import oficinaMecanica.dao.UsuarioDAO;
+import oficinaMecanica.modelo.Usuario;
 
-//A anotação abaixo, faz com que as informações sejam guardadas durante toda a sessão da aplicação.
+//A anotaï¿½ï¿½o abaixo, faz com que as informaï¿½ï¿½es sejam guardadas durante toda a sessï¿½o da aplicaï¿½ï¿½o.
 @SessionScoped
 @ManagedBean
 public class LoginBean {
@@ -20,15 +20,15 @@ public class LoginBean {
 		this.usuario = usuario;
 	}
 	
-	//Verifica se o usuário é válido
+	//Verifica se o usuï¿½rio ï¿½ vï¿½lido
 	public String efetuaLogin(){
-		//Verifica se as informações são válidas
+		//Verifica se as informaï¿½ï¿½es sï¿½o vï¿½lidas
 		boolean loginValido = UsuarioDAO.usuarioExiste(usuario);
 		
-		//Caso sejam, redireciona para a página inicial da aplicação
+		//Caso sejam, redireciona para a pï¿½gina inicial da aplicaï¿½ï¿½o
 		if(loginValido) return "recepcionista?faces-redirect=true";
 		else{
-			//Caso não seja, limpa os dados inseridos e redireciona para a tela de login
+			//Caso nï¿½o seja, limpa os dados inseridos e redireciona para a tela de login
 			this.usuario = new Usuario();
 			return "login";
 		}
