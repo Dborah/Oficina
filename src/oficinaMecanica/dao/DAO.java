@@ -1,11 +1,11 @@
-package deborah.com.dao;
+package oficinaMecanica.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
-import deborah.com.jpa.JPAUtil;
+import oficinaMecanica.jpa.JPAUtil;
 
 
 /*
