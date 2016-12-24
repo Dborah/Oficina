@@ -21,7 +21,6 @@ public class Cliente {
 	private String nome;
 	@NotEmpty(message = "O telefone deve ser informado")
 	private String telefone;
-	private String placaVeiculo;
 	@NotEmpty(message = "O CPF deve ser informado")
 	@CPF(message = "CPF inválido")
 	private String cpf;
@@ -50,12 +49,7 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getPlacaVeiculo() {
-		return placaVeiculo;
-	}
-	public void setPlacaVeiculo(String placaVeiculo) {
-		this.placaVeiculo = placaVeiculo;
-	}
+
 	public String getCpf() {
 		return cpf;
 	}
