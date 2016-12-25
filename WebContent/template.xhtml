@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:composite="http://java.sun.com/jsf/composite"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">
+	
+	<h:head>
+		<title>Oficina mecaninca</title>
+      	<h:outputStylesheet name="style.css" library="css"/>   	
+	</h:head>
+	
+	<h:body>
+		<div id="cabecalho">
+		<!--  <h:graphicImage library="imagens" name="logo_oficina" id="logoCompany"/>-->
+			<div id="usuarioLogado">
+				<h:form rendered="#{not empty loginBean.usuario.usuario}">
+					Bem vindo, <h:outputText value="#{loginBean.usuario.usuario}">
+						
+					</h:outputText>.
+				</h:form>	
+			</div>
+			
+			<h:form>
+				<!-- Componente p:themeSwitcher -->
+				<p:themeSwitcher style="float: right; right: 50%; margin-right: -450px;">
+					<f:selectItem itemLabel="Escolha seu tema" itemValue=""/>
+					<f:selectItem itemLabel="Aristo" itemValue="aristo"/>
+					<f:selectItem itemLabel="Bluesky" itemValue="bluesky"/>
+					<f:selectItem itemLabel="Bootstrap" itemValue="afternoon" />
+					<f:selectItem itemLabel="Dot-luv" itemValue="tod-luv"/>
+					<f:selectItem itemLabel="Midnight" itemValue="midnight"/>
+					<f:selectItem itemLabel="Rocket" itemValue="rocket" />
+				</p:themeSwitcher>
+			</h:form>
+			
+		</div>	
+		
+		<div id="conteudo">
+			
+			<h:form rendered="#{not empty loginBean.usuario.usuario}">
+					<p:menubar>
+						<p:menuitem value="Recepcionista" action="recepcionista.xhtml"/>
+						<p:menuitem value="Gerente" action="gerente.xhtml"/>
+						<p:menuitem value="Mecanico" action="mecanico.xhtml"/>
+						<p:menuitem value="Sair" action="#{loginBean.logout}"/>
+					</p:menubar>
+			</h:form>
+			<ui:insert name="corpo"/>
+		</div>
+		
+		<div id="rodape">
+			Curso Superior de Tecnologia em Sistemas para Internet<br/> 
+			Desenvolvimento de Aplicações Web - 2015<br/>
+		</div>
+		<h:outputScript name="script.js" library="js"/>
+	</h:body>
+</html>
