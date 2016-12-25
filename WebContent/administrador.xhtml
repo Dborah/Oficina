@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:composite="http://java.sun.com/jsf/composite"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">		
+<h:body>
+ <ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<p:tabView id="dados_administrador">
+			<p:tab title="Adicionar Usuários" id="info_usuarios">
+				<!--  Dados dos usuários -->
+				<h:form id="users">
+					<h2>
+					   <h:outputText value="Cadastrar Usuario" rendered="#{empty usuarioBean.usuario.idusuario}" />
+					   <h:outputText value="Editar Usuario" rendered="#{not empty usuarioBean.usuario.idusuario}" />
+					</h2>
+					<p:messages styleClass="erros"></p:messages>
+					<fieldset>
+						<legend>Cadastrar Usuario</legend>
+						
+						<h:outputLabel value="usuario" for="user"/>
+						<p:inputText value="#{usuarioBean.usuario.usuario}" id="user"/>
+						
+						<h:outputLabel value="senha" for="senha"/>
+						<p:password value="#{usuarioBean.usuario.senha}" id="senha"/>
+						
+						<h:outputLabel value="Papel" for="papel"/>
+						<p:inputText value="#{usuarioBean.usuario.papel}" id="papel"/>
+						
+						<h:commandButton action="#{usuarioBean.gravar}" value="Gravar" >
+							<!--  <f:setPropertyActionListener value="#{usuarioBean.usuario}" target="#{veiculoBean.veiculo.cliente}"/>--> 
+							<f:ajax execute="@form" render=":dados_administrador:users :dados_administrador:lista_usuarios"/> 
+						</h:commandButton>
+						<h:commandButton action="#{usuarioBean.cancela()}" value="Cancelar">
+							<f:ajax execute="@form" render=":dados_administrador:users"/>
+						</h:commandButton>
+					</fieldset>
+				</h:form>
+				
+				<!--Listagem  com todos os usuarios cadastrados -->
+				<h:form id="lista_usuarios">
+					<p:messages styleClass="erros"></p:messages>
+					<h2>Usuários Cadastrados</h2>
+					<p:dataTable value="#{usuarioBean.usuarios}" var="usuario" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Usuario</f:facet>
+							<h:outputText value="#{usuario.usuario}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Papel</f:facet>
+							<h:outputText value="#{usuario.papel}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Senha</f:facet>
+							<h:outputText value="#{usuario.senha}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink value="Alterar" styleClass="btn btn-warning">
+								<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}"/>
+								<f:ajax execute="@form" render=":dados_administrador:users"/>
+							</h:commandLink>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink value="Remover" action="#{usuarioBean.remove(usuario)}" styleClass="btn btn-danger">
+								<f:ajax execute="@form" render=":dados_administrador:lista_usuarios"/> 
+							</h:commandLink>
+						</p:column>	
+					</p:dataTable>
+				</h:form>
+			</p:tab>		
+		</p:tabView>
+										
+	</ui:define>
+  </ui:composition>
+</h:body>
+</html>
