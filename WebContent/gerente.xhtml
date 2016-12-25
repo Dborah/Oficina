@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:composite="http://java.sun.com/jsf/composite"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">		
+<h:body>
+ <ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<p:tabView id="dados_gerente">
+			<p:tab title="Concluir ordem de Serviço" id="info_usuarios">
+					<!-- listagem com os veiculos cadastrados -->
+					<h:form id="lista_oss">	
+						<p:messages styleClass="erros"></p:messages>
+						 <h2></h2>
+						 <p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="4">
+							<p:column>
+							<f:facet name="header">Veículo</f:facet>
+							<h:outputText value="#{os.veiculo.modelo}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Serviço</f:facet>
+							<h:outputText value="#{os.servico}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Data do Serviço</f:facet>
+							<h:outputText value="#{os.dataServico}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Data do Orçamento</f:facet>
+							<h:outputText value="#{os.dataOrcamento}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Status</f:facet>
+							<h:outputText value="#{os.status}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Açao</f:facet>
+							<h:commandLink value="Concluída" action="#{oSBean.atualizaStatus(os,'Concluída')}" styleClass="btn btn-warning">
+								<f:setPropertyActionListener value="#{os}" target="#{oSBean.os}"/>
+								<f:ajax execute="@form" render=":dados_gerente:lista_oss"/>
+							</h:commandLink>
+						</p:column>					
+						</p:dataTable>
+					</h:form>
+			</p:tab>		
+		</p:tabView>
+										
+	</ui:define>
+  </ui:composition>
+</h:body>
+</html>
