@@ -45,7 +45,44 @@
 						</p:column>					
 						</p:dataTable>
 					</h:form>
-			</p:tab>		
+			</p:tab>	
+			<p:tab title="Remover Cliente" id="remover_clientes">
+				<!-- Listagem com os clientes cadastrados -->
+				<h:form id="lista_clientes">
+					<p:messages styleClass="error"></p:messages>
+					<h2>Clientes Cadastrados</h2>
+					
+					<p:dataTable value="#{clienteBean.clientes}" var="cliente" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{cliente.nome}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">CPF</f:facet>
+							<h:outputText value="#{cliente.cpf}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Telefone</f:facet>
+							<h:outputText value="#{cliente.telefone}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Endereço</f:facet>
+							<h:outputText value="#{cliente.endereco}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink value="Remover" action="#{clienteBean.remove(cliente)}" styleClass="btn btn-danger">
+								<f:ajax execute="@form" render=":dados_gerente:lista_clientes"/> 
+							</h:commandLink>
+						</p:column>
+						
+					</p:dataTable>					
+				</h:form>
+			</p:tab>	
 		</p:tabView>
 										
 	</ui:define>
