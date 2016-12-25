@@ -272,8 +272,43 @@
 						</p:column>								
 					</p:dataTable>
 				</h:form>
-			</p:tab>	
-			
+			</p:tab>
+			<p:tab title="Ordem de Serviço">
+          	<h:form id="lista_oss">
+					<p:messages styleClass="erros"></p:messages>
+					<h2>Ordens de Serviço</h2>
+					<p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Veículo</f:facet>
+							<h:outputText value="#{os.veiculo.modelo}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Serviço</f:facet>
+							<h:outputText value="#{os.servico}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Data do Serviço</f:facet>
+							<h:outputText value="#{os.dataServico}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Data do Orçamento</f:facet>
+							<h:outputText value="#{os.dataOrcamento}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Status</f:facet>
+							<h:outputText value="#{os.status}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Açao</f:facet>
+							<h:commandLink value="Aprovar" action="#{oSBean.atualizaStatus(os)}" styleClass="btn btn-warning">
+								<f:setPropertyActionListener value="#{os}" target="#{oSBean.os}"/>
+								<f:ajax execute="@form" render=":dados_recepcionista:lista_oss"/>
+							</h:commandLink>
+						</p:column>
+						
+						</p:dataTable>
+						</h:form>
+        </p:tab>
 		</p:tabView>								
 	</ui:define>
   </ui:composition>
