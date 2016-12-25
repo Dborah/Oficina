@@ -19,18 +19,15 @@
 					<p:messages styleClass="erros"></p:messages>
 					<fieldset>
 						<legend>Realizar orçamento</legend>
-						
+        				
 						<h3>Serviço</h3>
-    					<p:inputTextarea rows="6" cols="33" />
-						
-						<h:outputLabel value="Status" for="status"/>
-						<p:inputText  id="status" value="#{oSBean.os.status}"/>
+    					<p:inputTextarea rows="6" cols="33" id="servico" value="#{oSBean.os.servico}" />
 						
 						<h:outputLabel value="Valor" for="valor"/>
 						<p:inputText id="valor" value="#{oSBean.os.valor}"/>
 						
 						<h:outputLabel value="Id Veiculo" for="id_veiculo"/>
-						<p:inputText  value="#{oSBean.os.veiculo}" id="id_veiculo"/>
+						<p:inputText  value="#{oSBean.os.veiculo.id}" id="id_veiculo"/>
 						
 						<h:commandButton action="#{oSBean.gravar()}" value="Gravar" >
 							<!--  <f:setPropertyActionListener value="#{oSBean.os}" target="#{oSBean.os.veiculo.id}"/>-->
@@ -76,7 +73,7 @@
 							<p:column>
 								<f:facet name="header">Selecionar</f:facet>
 								<h:commandLink value="Selecionar" styleClass="btn btn-warning">
-									<f:setPropertyActionListener value="#{os}" target="#{veiculoBean.veiculo}"/>
+									<f:setPropertyActionListener value="#{veiculo}" target="#{oSBean.os.veiculo}"/>
 									<f:ajax execute="@form" render=":dados_mecanico:os"/>
 								</h:commandLink>
 							</p:column>							
