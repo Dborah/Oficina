@@ -13,7 +13,7 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			
 			<!-- atualiza o banco, gera as tabelas se for preciso -->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			
 			<!-- Exibe sql usada pelo hibernate pelo console -->
 			<property name="hibernate.show_sql" value="true" />
