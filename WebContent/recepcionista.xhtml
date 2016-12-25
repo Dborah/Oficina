@@ -90,7 +90,7 @@
 						<p:column>
                              <f:facet name="header">Selecionar</f:facet>
                              <h:commandLink value="Selecionar" styleClass="btn btn-warning">
-                                  <f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.cliente}"/>
+                                  <f:setPropertyActionListener value="#{cliente}" target="#{veiculoBean.veiculo.cliente}"/>
                                     <f:ajax execute="@form" render=":dados_recepcionista:veiculos"/>
                               </h:commandLink>
                          </p:column>
@@ -122,8 +122,8 @@
 							<h:outputLabel value="Ano Modelo" for="anoModelo"/>
 							<p:inputText value="#{veiculoBean.veiculo.anoModelo}" id="anoModelo"/>
 							
-							<h:outputLabel value="Id Cliente" for="idCliente"/>
-							<p:inputText value="#{veiculoBean.veiculo.cliente.id}" id="idCliente"/>
+							<h:outputLabel value="Id Cliente" for="cliente_id"/>
+							<p:inputText value="#{veiculoBean.veiculo.cliente.id}" id="cliente_id"/>
 							
 							<h:outputLabel value="CPF Cliente" for="cpfCliente"/>
 							<p:inputText value="#{veiculoBean.veiculo.cliente.cpf}" id="cpfCliente"/>
