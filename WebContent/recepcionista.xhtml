@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:composite="http://java.sun.com/jsf/composite"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">		
+<h:body>
+ <ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<p:tabView id="dados_recepcionista">
+			<p:tab title="Cliente" id="info_clientes">
+				<!--Dados do cliente -->
+				<h:form id="clientes">
+					<h2>
+					   <h:outputText value="Cadastrar Cliente" rendered="#{empty clienteBean.cliente.id}" />
+					   <h:outputText value="Editar Cliente" rendered="#{not empty clienteBean.cliente.id}" />
+					</h2>
+					<p:messages styleClass="erros"> </p:messages>
+					<fieldset>
+						<legend>Dados do Cliente</legend>
+						
+						<h:outputLabel value="Nome" for="cliente"/>
+						<p:inputText value="#{clienteBean.cliente.nome}" id="cliente"/>
+						
+						<h:outputLabel value="Telefone" for="tel_cliente"/>
+						<p:inputMask mask="(99) 99999-9999" value="#{clienteBean.cliente.telefone}" id="tel_cliente"/>
+						
+						<h:outputLabel value="CPF" for="cpf"/>
+						<p:inputMask mask="999.999.999-99" value="#{clienteBean.cliente.cpf}" id="cpf"/>
+						
+						<h:outputLabel value="E-mail" for="email"/>
+						<p:inputText value="#{clienteBean.cliente.email}" id="email"/>
+						
+						<h:outputLabel value="Endereço" for="endereco"/>
+						<p:inputTextarea value="#{clienteBean.cliente.endereco}" id="endereco"></p:inputTextarea>
+						
+						<h:commandButton action="#{clienteBean.gravar()}" value="Gravar" >
+							<f:setPropertyActionListener value="#{clienteBean.cliente}" target="#{veiculoBean.veiculo.cliente}"/> 
+							<f:ajax execute="@form" render=":dados_recepcionista:clientes :dados_recepcionista:lista_clientes"/> 
+						</h:commandButton>
+						<h:commandButton action="#{clienteBean.cancela}" value="Cancelar">
+							<f:ajax execute="@form" render=":dados_recepcionista:clientes"/>
+						</h:commandButton>										
+					</fieldset>
+				</h:form>
+				
+				<!-- Listagem com os clientes cadastrados -->
+				<h:form id="lista_clientes">
+					<p:messages styleClass="error"></p:messages>
+					<h2>Clientes Cadastrados</h2>
+					
+					<p:dataTable value="#{clienteBean.clientes}" var="cliente" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{cliente.nome}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">CPF</f:facet>
+							<h:outputText value="#{cliente.cpf}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Telefone</f:facet>
+							<h:outputText value="#{cliente.telefone}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Endereço</f:facet>
+							<h:outputText value="#{cliente.endereco}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink value="Alterar" styleClass="btn btn-warning">
+								<f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.cliente}"/>
+								<f:ajax execute="@form" render=":dados_recepcionista:clientes"/>
+							</h:commandLink>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink value="Remover" action="#{clienteBean.remove(cliente)}" styleClass="btn btn-danger">
+								<f:ajax execute="@form" render=":dados_recepcionista:lista_clientes"/> 
+							</h:commandLink>
+						</p:column>
+						
+						<p:column>
+                             <f:facet name="header">Selecionar</f:facet>
+                             <h:commandLink value="Selecionar" styleClass="btn btn-warning">
+                                  <f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.cliente}"/>
+                                    <f:ajax execute="@form" render=":dados_recepcionista:veiculos"/>
+                              </h:commandLink>
+                         </p:column>
+					</p:dataTable>					
+				</h:form>
+				
+				<p:tab title="Veiculo">
+					<!-- Dados do veiculo -->
+					<h:form id="veiculos">
+						<h2>
+							<h:outputText value="Cadastrar Veiculos" rendered="#{empty veiculoBean.veiculo.id}" />
+							<h:outputText value="Editar Veiculo" rendered="#{not empty veiculoBean.veiculo.id}" />
+						</h2>
+						<p:messages styleClass="erros"></p:messages>
+						<fieldset>
+							<legend>Dados do Veiculo</legend>
+							<h:outputLabel value="Marca" for="marca"/>
+							<p:inputText value="#{veiculoBean.veiculo.marca}" id="marca"/>
+							
+							<h:outputLabel value="Modelo" for="modelo"/>
+							<p:inputText value="#{veiculoBean.veiculo.modelo}" id="modelo"/>
+							
+							<h:outputLabel value="Placa do Veiculo" for="placaVeiculo"/>
+							<p:inputText value="#{veiculoBean.veiculo.placa}" id="placaVeiculo"/>
+							
+							<h:outputLabel value="Ano Fabricação" for="anoFabricao"/>
+							<p:inputText value="#{veiculoBean.veiculo.anoFabricacao}" id="anoFabricacao"/>
+							
+							<h:outputLabel value="Ano Modelo" for="anoModelo"/>
+							<p:inputText value="#{veiculoBean.veiculo.anoModelo}" id="anoMdelo"/>
+							
+							<h:outputLabel value="Id Cliente" for="idCliente"/>
+							<p:inputText value="#{veiculoBean.veiculo.cliente.id}" id="idCliente"/>
+							
+							<h:outputLabel value="CPF Cliente" for="cpfCliente"/>
+							<p:inputText value="#{veiculoBean.veiculo.cliente.cpf}" id="cpfCliente"/>
+							
+							<h:commandButton action="#{veiculoBean.gravar}" value="Gravar" >
+								<f:setPropertyActionListener value="#{veiculoBean.veiculo}" target="#{veiculoBean.veiculo.cliente}"/> - 
+								<f:ajax execute="@form" render=":dados_recepcionista:veiculos :dados_recepcionista:lista_veiculos"/> 
+							</h:commandButton>
+							<h:commandButton action="#{veiculoBean.cancela}" value="Cancelar">
+								<f:ajax execute="@form" render=":dados_recepcionista:veiculos"/>
+							</h:commandButton>
+						</fieldset>
+					</h:form>
+					
+					<!-- listagem com os veiculos cadastrados -->
+					<h:form id="lista_veiculos">	
+						<p:messages styleClass="erros"></p:messages>
+						 <h2>Veiculos Cadastrados</h2>
+						 <p:dataTable value="#{veiculoBean.veiculos}" var="veiculo" paginator="true" rows="4">
+							<p:column>
+								<f:facet name="header">Marca</f:facet>
+								<h:outputText value="#{veiculo.marca}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Modelo</f:facet>
+								<h:outputText value="#{veiculo.modelo}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Placa</f:facet>
+								<h:outputText value="#{veiculo.placa}"/>
+							</p:column>
+							
+							
+							<p:column>
+								<f:facet name="header">Ano Fabricacao</f:facet>
+								<h:outputText value="#{veiculo.anoFabricacao}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Ano Modelo</f:facet>
+								<h:outputText value="#{veiculo.anoModelo}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Alterar</f:facet>
+								<h:commandLink value="Alterar" styleClass="btn btn-warning">
+									<f:setPropertyActionListener value="#{veiculo}" target="#{veiculoBean.veiculo}"/>
+									<f:ajax execute="@form" render=":dados_recepcionista:veiculos"/>
+								</h:commandLink>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Remover</f:facet>
+								<h:commandLink value="Remover" action="#{veiculoBean.remove(veiculo)}" styleClass="btn btn-danger">
+									<f:ajax execute="@form" render=":dados_recepcionista:lista_veiculos"/> 
+								</h:commandLink>
+							</p:column>								
+						</p:dataTable>
+					</h:form>
+				</p:tab>
+			</p:tab>
+			
+			<!--  Aba Peca -->
+			<p:tab title="Peça" id="info_pecas">
+				<!-- Dados das peças -->
+				<h:form id="pecas">
+					<h2>
+						<h:outputText value="Cadastrar Peças" rendered="#{empty pecaBean.peca.id}" />
+						<h:outputText value="Editar Pecas" rendered="#{not empty pecaBean.peca.id}" />
+					</h2>
+					<p:messages styleClass="erros"></p:messages>
+					<fieldset>	
+						<legend>Dados das Peças</legend>
+						<h:outputLabel value="Nome" for="nome"/>
+							<p:inputText value="#{pecaBean.peca.nome}" id="nome"/>
+			
+							<h:outputLabel value="Fornecedor" for="fornecedor"/>
+							<p:inputText value="#{pecaBean.peca.fornecedor}" id="fornecedor"/>
+							
+							<h:outputLabel value="Tipo" for="tipo"/>
+							<p:inputText value="#{pecaBean.peca.tipo}" id="tipo"/>
+							
+							<h:outputLabel value="Marca" for="marca"/>
+							<p:inputText value="#{pecaBean.peca.marca}" id="marca"/>
+							
+							<h:outputLabel value="Quantidade" for="quantidade"/>
+							<p:inputText value="#{pecaBean.peca.quantidade}" id="quantidade"/>
+							
+		
+							<h:commandButton action="#{pecaBean.gravar()}" value="Gravar" >
+								<!--  <f:setPropertyActionListener value="#{pecaBean.peca}" target="#{veiculoBean.veiculo.cliente}"/>-->  
+								<f:ajax execute="@form" render=":dados_recepcionista:pecas :dados_recepcionista:lista_pecas"/> 
+							</h:commandButton>
+							<h:commandButton action="#{pecaBean.cancela()}" value="Cancelar">
+								<f:ajax execute="@form" render=":dados_recepcionista:pecas"/>
+							</h:commandButton>						
+					</fieldset>
+				</h:form>
+				
+				<!-- Listagem com os clientes cadastrados -->
+				<h:form id="lista_pecas">
+					<p:messages styleClass="erros"></p:messages>
+					<h2>Pecas Cadastradas</h2>
+					<p:dataTable value="#{pecaBean.pecas}" var="peca" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{peca.nome}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Fornecedor</f:facet>
+							<h:outputText value="#{peca.fornecedor}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Tipo</f:facet>
+							<h:outputText value="#{peca.tipo}"/>
+						</p:column>
+						
+						
+						<p:column>
+							<f:facet name="header">Marca</f:facet>
+							<h:outputText value="#{peca.marca}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Quantidade</f:facet>
+							<h:outputText value="#{peca.quantidade}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink value="Alterar" styleClass="btn btn-warning">
+								<f:setPropertyActionListener value="#{peca}" target="#{pecaBean.peca}"/>
+								<f:ajax execute="@form" render=":dados_recepcionista:pecas"/>
+							</h:commandLink>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink value="Remover" action="#{pecaBean.remove(peca)}" styleClass="btn btn-danger">
+								<f:ajax execute="@form" render=":dados_recepcionista:lista_pecas"/> 
+							</h:commandLink>
+						</p:column>								
+					</p:dataTable>
+				</h:form>
+			</p:tab>	
+			<p:tab title="Ordem Servico">
+				<!-- lista todos os veiculos cadastrados -->
+				<h:form id="veiculosCadastrados">
+					<p:messages styleClass="erros"></p:messages>
+					<h2>Veiculos Cadastrados</h2>
+					
+					<p:dataTable value="#{veiculoBean.veiculos}" var="veiculo" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Marca</f:facet>
+							<h:outputText value="#{veiculo.marca}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Modelo</f:facet>
+							<h:outputText value="#{veiculo.modelo}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Placa</f:facet>
+							<h:outputText value="#{veiculo.placa}"/>
+						</p:column>
+						
+						
+						<p:column>
+							<f:facet name="header">Ano Fabricacao</f:facet>
+							<h:outputText value="#{veiculo.anoFabricacao}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Ano Modelo</f:facet>
+							<h:outputText value="#{veiculo.anoModelo}"/>
+						</p:column>
+						
+						<p:column>
+                            <f:facet name="header">Selecionar</f:facet>
+                               <h:commandLink value="Selecionar" styleClass="btn btn-warning">
+                                  <f:setPropertyActionListener value="#{veiculo}" target="#{veiculoBean.veiculo}"/>
+                                  <f:ajax execute="@form" render=":dados_recepcionista:ordemServicos"/>
+                              </h:commandLink>
+                        </p:column>						
+					</p:dataTable>			
+				</h:form>
+				
+				<!-- Cadastrar ordem servico -->
+				<p:tab title="Ordem Servico">
+					<h:form id="ordemServicos">
+						<h2>
+							<h:outputText value="Cadastrar Ordem Servico" rendered="#{empty ordemServicoBean.ordemServico.idos}" />
+							<h:outputText value="Editar Veiculo" rendered="#{not empty ordemServicoBean.ordemServico.idos}" />
+					    </h2>
+					    <p:messages styleClass="erros"></p:messages>
+					    <fieldset>
+					    	<legend>Dados da Ordem de Serviço</legend>
+					    	
+					    	<h:outputLabel value="Data do Orcamento" for="dataOrcamento"/>
+							<p:calendar value="#{ordemServicoBean.ordemServico.dataOrcamento.time}" pattern="dd/MM/yyyy" id="dataOrcamento"/>
+						
+							<h:outputLabel value="Data do Servico" for="dataServico"/>
+							<p:calendar value="#{ordemServicoBean.ordemServico.dataServico.time}" pattern="dd/MM/yyyy" id="dataServico"/>
+							
+							<h:outputLabel value="Valor" for="valor"/>
+							<p:inputText value="#{ordemServicoBean.ordemServico.valor}" id="valor"/>
+								
+							<h:outputLabel value="Status" for="status"/>
+							<p:inputText value="#{ordemServicoBean.ordemServico.status}" id="status"/>
+							
+							<h:outputLabel value="Servico" for="servico"/>
+							<p:inputTextarea value="#{ordemServicoBean.ordemServico.servico}" id="servico"></p:inputTextarea>
+							
+							<h:outputLabel value="Id Veiculo" for="idVeiculo"/>
+							<p:inputText value="#{ordemServicoBean.ordemServico.veiculo.id}" id="idVeiculo"/>					
+								
+							<h:commandButton action="#{ordemServicoBean.gravar}" value="Gravar" >
+								<f:setPropertyActionListener value="#{ordemServicoBean.ordemServico}" target="#{ordemServicoBean.ordemServico.veiculo}"/>
+								<f:ajax execute="@form" render=":dados_recepcionista:ordemServicos :dados_recepcionista:lista_ordemServico"/> 
+							</h:commandButton>
+							<h:commandButton action="#{veiculoBean.cancela}" value="Cancelar">
+								<f:ajax execute="@form" render=":dados_recepcionista:ordemServicos"/>
+							</h:commandButton>
+					    </fieldset>
+					</h:form>
+					
+					<!-- Lista ordem de servicos Cadastradas -->
+					<h:form id="lista_ordemServico">
+						<p:messages styleClass="erros"></p:messages>
+						<h2>Ordem de Serviços cadastradas</h2>
+						<p:dataTable value="#{ordemServicoBean.ordensServico}" var="ordemServico" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Data Orcamento</f:facet>
+							<h:outputText value="#{ordemServico.dataServico.time}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Data Serviço</f:facet>
+							<h:outputText value="#{ordemServico.dataServico.time}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Valor</f:facet>
+							<h:outputText value="#{ordemServico.valor}"/>
+						</p:column>
+						
+						
+						<p:column>
+							<f:facet name="header">Status</f:facet>
+							<h:outputText value="#{ordemServico.status}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Servico</f:facet>
+							<h:outputText value="#{ordemServico.servico}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink value="Alterar" styleClass="btn btn-warning">
+								<f:setPropertyActionListener value="#{orordemServico}" target="#{ordemServicoBean.ordemServico}"/>
+								<f:ajax execute="@form" render=":dados_recepcionista:ordemServicos"/>
+							</h:commandLink>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink value="Remover" action="#{ordemServicoBean.remove(ordemServico)}" styleClass="btn btn-danger">
+								<f:ajax execute="@form" render=":dados_recepcionista:lista_ordemServico"/> 
+							</h:commandLink>
+						</p:column>						
+					</p:dataTable>
+					</h:form>				
+				</p:tab>
+			</p:tab>		
+		</p:tabView>								
+	</ui:define>
+  </ui:composition>
+</h:body>
+</html>
