@@ -50,7 +50,15 @@ public class OSBean {
 		os.setStatus(status);
 		dao.atualiza(os);
 	}
-
+	
+	public void atualizaStatusEData(OrdemServico os,String status){
+		DAO<OrdemServico> dao = new DAO<>(OrdemServico.class);
+		Calendar cal = Calendar.getInstance();
+		os.setDataServico(cal);
+		os.setStatus(status);
+		dao.atualiza(os);
+	}
+	
 	
 
 }

@@ -225,7 +225,7 @@
 					</fieldset>
 				</h:form>
 				
-				<!-- Listagem com os clientes cadastrados -->
+				<!-- Listagem com as peças cdatsradas-->
 				<h:form id="lista_pecas">
 					<p:messages styleClass="erros"></p:messages>
 					<h2>Pecas Cadastradas</h2>
@@ -300,7 +300,7 @@
 						</p:column>
 						<p:column>
 							<f:facet name="header">Açao</f:facet>
-							<h:commandLink value="Aprovar" action="#{oSBean.atualizaStatus(os)}" styleClass="btn btn-warning">
+							<h:commandLink value="Aprovar" action="#{oSBean.atualizaStatusEData(os,'Aprovada')}" styleClass="btn btn-warning">
 								<f:setPropertyActionListener value="#{os}" target="#{oSBean.os}"/>
 								<f:ajax execute="@form" render=":dados_recepcionista:lista_oss"/>
 							</h:commandLink>
