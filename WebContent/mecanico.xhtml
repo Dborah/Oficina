@@ -79,7 +79,84 @@
 							</p:column>							
 						</p:dataTable>
 					</h:form>
-			</p:tab>		
+			</p:tab>
+			<p:tab title="Retirar peças" id="info_peças">
+				<!-- Dados das peças -->
+				<h:form id="pecas">
+					<h2>
+						<h:outputText value="Cadastrar Peças" rendered="#{empty pecaBean.peca.id}" />
+						<h:outputText value="Editar Pecas" rendered="#{not empty pecaBean.peca.id}" />
+					</h2>
+					<p:messages styleClass="erros"></p:messages>
+					<fieldset>	
+						<legend>Dados das Peças</legend>
+						<h:outputLabel value="Nome" for="nome"/>
+							<p:inputText value="#{pecaBean.peca.nome}" id="nome"/>
+			
+							<h:outputLabel value="Fornecedor" for="fornecedor"/>
+							<p:inputText value="#{pecaBean.peca.fornecedor}" id="fornecedor"/>
+							
+							<h:outputLabel value="Tipo" for="tipo"/>
+							<p:inputText value="#{pecaBean.peca.tipo}" id="tipo"/>
+							
+							<h:outputLabel value="Marca" for="marca"/>
+							<p:inputText value="#{pecaBean.peca.marca}" id="marca"/>
+							
+							<h:outputLabel value="Quantidade" for="quantidade"/>
+							<p:inputText value="#{pecaBean.peca.quantidade}" id="quantidade"/>
+							
+		
+							<h:commandButton action="#{pecaBean.gravar()}" value="Gravar" >
+								<!--  <f:setPropertyActionListener value="#{pecaBean.peca}" target="#{veiculoBean.veiculo.cliente}"/>-->  
+								<f:ajax execute="@form" render=":dados_mecanico:pecas :dados_mecanico:lista_pecas"/> 
+							</h:commandButton>
+							<h:commandButton action="#{pecaBean.cancela()}" value="Cancelar">
+								<f:ajax execute="@form" render=":dados_mecanico:pecas"/>
+							</h:commandButton>						
+					</fieldset>
+				</h:form>
+				
+				<!-- Listagem com as peças cdatsradas-->
+				<h:form id="lista_pecas">
+					<p:messages styleClass="erros"></p:messages>
+					<h2>Pecas Cadastradas</h2>
+					<p:dataTable value="#{pecaBean.pecas}" var="peca" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{peca.nome}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Fornecedor</f:facet>
+							<h:outputText value="#{peca.fornecedor}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Tipo</f:facet>
+							<h:outputText value="#{peca.tipo}"/>
+						</p:column>
+						
+						
+						<p:column>
+							<f:facet name="header">Marca</f:facet>
+							<h:outputText value="#{peca.marca}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Quantidade</f:facet>
+							<h:outputText value="#{peca.quantidade}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink value="Alterar" styleClass="btn btn-warning">
+								<f:setPropertyActionListener value="#{peca}" target="#{pecaBean.peca}"/>
+								<f:ajax execute="@form" render=":dados_mecanico:pecas"/>
+							</h:commandLink>
+						</p:column>						
+					</p:dataTable>
+				</h:form>
+			</p:tab>
 		</p:tabView>
 										
 	</ui:define>
