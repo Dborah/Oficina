@@ -30,7 +30,7 @@
 						<h:outputLabel value="Papel" for="papel"/>
 						<p:inputText value="#{usuarioBean.usuario.papel}" id="papel"/>
 						
-						<h:commandButton action="#{usuarioBean.gravar}" value="Gravar" >
+						<h:commandButton action="#{usuarioBean.gravar()}" value="Gravar" >
 							<!--  <f:setPropertyActionListener value="#{usuarioBean.usuario}" target="#{veiculoBean.veiculo.cliente}"/>--> 
 							<f:ajax execute="@form" render=":dados_administrador:users :dados_administrador:lista_usuarios"/> 
 						</h:commandButton>

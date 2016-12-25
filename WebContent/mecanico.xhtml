@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:composite="http://java.sun.com/jsf/composite"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">		
+<h:body>
+ <ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<p:tabView id="dados_mecanico">
+			<p:tab title="Realizar orçamento" id="info_usuarios">
+				<!--  Dados dos usuários -->
+				<h:form id="os">
+					<h2>
+					   <h:outputText value="Realizar orçamento" rendered="#{empty usuarioBean.usuario.idusuario}" />
+					</h2>
+					<p:messages styleClass="erros"></p:messages>
+					<fieldset>
+						<legend>Realizar orçamento</legend>
+						
+						<h3>Serviço</h3>
+    					<p:inputTextarea rows="6" cols="33" />
+						
+						<h:outputLabel value="Status" for="status"/>
+						<p:inputText  id="status" value="#{oSBean.os.status}"/>
+						
+						<h:outputLabel value="Valor" for="valor"/>
+						<p:inputText id="valor" value="#{oSBean.os.valor}"/>
+						
+						<h:outputLabel value="Id Veiculo" for="id_veiculo"/>
+						<p:inputText  value="#{oSBean.os.veiculo}" id="id_veiculo"/>
+						
+						<h:commandButton action="#{oSBean.gravar()}" value="Gravar" >
+							<!--  <f:setPropertyActionListener value="#{oSBean.os}" target="#{oSBean.os.veiculo.id}"/>-->
+							<!--  <f:ajax execute="@form" render=":dados_mecanico:os :dados_mecanico:lista_veiculos"/>-->
+						</h:commandButton>
+						<h:commandButton action="#{usuarioBean.cancela()}" value="Cancelar">
+							<!-- ><f:ajax execute="@form" render=":dados_administrador:users"/> -->
+						</h:commandButton>
+					</fieldset>
+				</h:form>
+				
+					<!-- listagem com os veiculos cadastrados -->
+					<h:form id="lista_veiculos">	
+						<p:messages styleClass="erros"></p:messages>
+						 <h2>Veiculos Cadastrados</h2>
+						 <p:dataTable value="#{veiculoBean.veiculos}" var="veiculo" paginator="true" rows="4">
+							<p:column>
+								<f:facet name="header">Marca</f:facet>
+								<h:outputText value="#{veiculo.marca}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Modelo</f:facet>
+								<h:outputText value="#{veiculo.modelo}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Placa</f:facet>
+								<h:outputText value="#{veiculo.placa}"/>
+							</p:column>
+							
+							
+							<p:column>
+								<f:facet name="header">Ano Fabricacao</f:facet>
+								<h:outputText value="#{veiculo.anoFabricacao}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Ano Modelo</f:facet>
+								<h:outputText value="#{veiculo.anoModelo}"/>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Selecionar</f:facet>
+								<h:commandLink value="Selecionar" styleClass="btn btn-warning">
+									<f:setPropertyActionListener value="#{os}" target="#{veiculoBean.veiculo}"/>
+									<f:ajax execute="@form" render=":dados_mecanico:os"/>
+								</h:commandLink>
+							</p:column>							
+						</p:dataTable>
+					</h:form>
+			</p:tab>		
+		</p:tabView>
+										
+	</ui:define>
+  </ui:composition>
+</h:body>
+</html>
