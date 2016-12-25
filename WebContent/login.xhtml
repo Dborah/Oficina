@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="#">
+<ui:composition template="/template.xhtml">
 	<ui:define name="corpo">
 		<h2>
 			Bem vindo, por favor, entre com seu usuário e senha para começar.
@@ -24,7 +24,7 @@
 				<h:commandButton action="#{loginBean.efetuaLogin}" value="Efetuar Login" styleClass="wag_btn-sucess"/>
 			</fieldset>
 		</h:form>
-		<h:graphicImage library="imagens" name="upa01.jpg"/>
+		
 		
 	</ui:define>
 	</ui:composition>
