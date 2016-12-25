@@ -82,7 +82,48 @@
 						
 					</p:dataTable>					
 				</h:form>
-			</p:tab>	
+			</p:tab>
+			<p:tab title="Remover Peça" id="remover_peças">
+				<!-- Listagem com as peças cdatsradas-->
+				<h:form id="lista_pecas">
+					<p:messages styleClass="erros"></p:messages>
+					<h2>Pecas Cadastradas</h2>
+					<p:dataTable value="#{pecaBean.pecas}" var="peca" paginator="true" rows="4">
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{peca.nome}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Fornecedor</f:facet>
+							<h:outputText value="#{peca.fornecedor}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Tipo</f:facet>
+							<h:outputText value="#{peca.tipo}"/>
+						</p:column>
+						
+						
+						<p:column>
+							<f:facet name="header">Marca</f:facet>
+							<h:outputText value="#{peca.marca}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Quantidade</f:facet>
+							<h:outputText value="#{peca.quantidade}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink value="Remover" action="#{pecaBean.remove(peca)}" styleClass="btn btn-danger">
+								<f:ajax execute="@form" render=":dados_gerente:lista_pecas"/> 
+							</h:commandLink>
+						</p:column>							
+					</p:dataTable>
+					</h:form>
+			</p:tab>
 		</p:tabView>
 										
 	</ui:define>
