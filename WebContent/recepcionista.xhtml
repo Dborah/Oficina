@@ -129,7 +129,7 @@
 							<p:inputText value="#{veiculoBean.veiculo.cliente.cpf}" id="cpfCliente"/>
 							
 							<h:commandButton action="#{veiculoBean.gravar}" value="Gravar" >
-								<f:setPropertyActionListener value="#{veiculoBean.veiculo}" target="#{veiculoBean.veiculo.cliente}"/> - 
+								<f:setPropertyActionListener value="#{veiculoBean.veiculo}" target="#{veiculoBean.veiculo}"/> - 
 								<f:ajax execute="@form" render=":dados_recepcionista:veiculos :dados_recepcionista:lista_veiculos"/> 
 							</h:commandButton>
 							<h:commandButton action="#{veiculoBean.cancela}" value="Cancelar">
