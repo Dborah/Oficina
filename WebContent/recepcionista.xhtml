@@ -288,11 +288,16 @@
 						</p:column>
 						<p:column>
 							<f:facet name="header">Data do Serviço</f:facet>
-							<h:outputText value="#{os.dataServico}"/>
+							<h:outputText value="#{os.dataServico.time}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeStyle="short"/>
+							</h:outputText>
 						</p:column>
+											
 						<p:column>
 							<f:facet name="header">Data do Orçamento</f:facet>
-							<h:outputText value="#{os.dataOrcamento}"/>
+							<h:outputText value="#{os.dataOrcamento.time}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeStyle="short"/>
+							</h:outputText>
 						</p:column>
 						<p:column>
 							<f:facet name="header">Status</f:facet>
