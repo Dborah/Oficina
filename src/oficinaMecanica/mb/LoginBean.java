@@ -24,9 +24,16 @@ public class LoginBean {
 	public String efetuaLogin(){
 		//Verifica se as informa��es s�o v�lidas
 		boolean loginValido = UsuarioDAO.usuarioExiste(usuario);
+			
 		
 		//Caso sejam, redireciona para a p�gina inicial da aplica��o
-		if(loginValido) return "recepcionista?faces-redirect=true";
+		if(loginValido){
+			Usuario papel = UsuarioDAO.buscaPorPapel(usuario.getUsuario());
+			if(papel.getPapel().equalsIgnoreCase("recepcionista")) return "recepcionista?faces-redirect=true";
+			else if(papel.getPapel().equalsIgnoreCase("mecanico")) return "mecanico?faces-redirect=true";
+				else if(papel.getPapel().equalsIgnoreCase("gerente")) return "gerente?faces-redirect=true";
+					else if(papel.getPapel().equalsIgnoreCase("administrador")) return "administrador?faces-redirect=true";
+						else return "login?faces-redirect=true";}
 		else{
 			//Caso n�o seja, limpa os dados inseridos e redireciona para a tela de login
 			this.usuario = new Usuario();
