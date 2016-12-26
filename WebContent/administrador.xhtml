@@ -28,7 +28,12 @@
 						<p:inputText value="#{usuarioBean.usuario.senha}" id="senha"/>
 						
 						<h:outputLabel value="Papel" for="papel"/>
-						<p:inputText value="#{usuarioBean.usuario.papel}" id="papel"/>
+								<p:selectOneMenu value="#{usuarioBean.usuario.papel}" id="papel">
+									<f:selectItem itemLabel="Recepcionista" itemValue="Recepcionista"/>
+									<f:selectItem itemLabel="Mecanico" itemValue="Mecanico"/>
+									<f:selectItem itemLabel="Gerente" itemValue="Gerente"/>
+									<f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
+						</p:selectOneMenu>
 						
 						<h:commandButton action="#{usuarioBean.gravar()}" value="Gravar" >
 							<!--  <f:setPropertyActionListener value="#{usuarioBean.usuario}" target="#{veiculoBean.veiculo.cliente}"/>--> 
