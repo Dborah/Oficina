@@ -277,7 +277,7 @@
           	<h:form id="lista_oss">
 					<p:messages styleClass="erros"></p:messages>
 					<h2>Ordens de Serviço</h2>
-					<p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="4">
+					<p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="4" rowStyleClass="#{os.status != 'Criada' ? 'ui-helper-hidden' : ''}">
 						<p:column>
 							<f:facet name="header">Veículo</f:facet>
 							<h:outputText value="#{os.veiculo.modelo}"/>
