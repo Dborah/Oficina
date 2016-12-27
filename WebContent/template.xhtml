@@ -9,17 +9,18 @@
 	
 	<h:head>
 		<title>Oficina mecaninca</title>
-      	<h:outputStylesheet name="style.css" library="css"/>   	
+      	<h:outputStylesheet name="style.css" library="css"/>   
+      	<h:outputStylesheet name="https://fonts.googleapis.com/css?family=Raleway"></h:outputStylesheet>	
 	</h:head>
 	
 	<h:body>
 		<div id="cabecalho">
-		<!--  <h:graphicImage library="imagens" name="logo_oficina" id="logoCompany"/>-->
+			<h:graphicImage library="imagens" name="logo_of.png" id="logoCompany" width="200"/>
 			<div id="usuarioLogado">
-				<h:form rendered="#{not empty loginBean.usuario.usuario}">
+				<h:form id="boas-vindas" rendered="#{not empty loginBean.usuario.usuario}">
 					Bem vindo, <h:outputText value="#{loginBean.usuario.usuario}">
-						
 					</h:outputText>.
+					<h:commandLink value="Sair" action="#{loginBean.logout}"/>
 				</h:form>	
 			</div>
 			
@@ -46,7 +47,6 @@
 						<p:menuitem value="Gerente" action="gerente.xhtml"/>
 						<p:menuitem value="Mecanico" action="mecanico.xhtml"/>
 						<p:menuitem value="Administrador" action="administrador.xhtml"/>
-						<p:menuitem value="Sair" action="#{loginBean.logout}"/>
 					</p:menubar>
 			</h:form>
 			<ui:insert name="corpo"/>
@@ -54,7 +54,7 @@
 		
 		<div id="rodape">
 			Curso Superior de Tecnologia em Sistemas para Internet<br/> 
-			Desenvolvimento de Aplicações Web - 2015<br/>
+			Desenvolvimento de Aplicações Web - 2016<br/>
 		</div>
 		<h:outputScript name="script.js" library="js"/>
 	</h:body>
