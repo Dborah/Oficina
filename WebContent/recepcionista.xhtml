@@ -31,7 +31,11 @@
 						<p:inputMask mask="999.999.999-99" value="#{clienteBean.cliente.cpf}" id="cpf"/>
 						
 						<h:outputLabel value="E-mail" for="email"/>
-						<p:inputText value="#{clienteBean.cliente.email}" id="email"/>
+						<p:inputText value="#{clienteBean.cliente.email}" id="email"
+							 requiredMessage="Por favor entre com seu endereço de e-mail."
+							 validatorMessage="Formato de e-mail inválido.">					 
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />				
+                        </p:inputText>
 						
 						<h:outputLabel value="Endereço" for="endereco"/>
 						<p:inputTextarea value="#{clienteBean.cliente.endereco}" id="endereco"></p:inputTextarea>
