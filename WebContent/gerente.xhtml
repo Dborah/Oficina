@@ -11,10 +11,10 @@
 	<ui:define name="corpo">
 		<p:tabView id="dados_gerente">
 			<p:tab title="Concluir ordem de Serviço" id="info_usuarios">
-					<!-- listagem com os veiculos cadastrados -->
+					<!-- listagem com as oss cadastrados -->
 					<h:form id="lista_oss">	
 						<p:messages styleClass="erros"></p:messages>
-						 <h2></h2>
+						 <h2>Concluir OS</h2>
 						 <p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="4">
 							<p:column>
 							<f:facet name="header">Veículo</f:facet>
@@ -49,6 +49,48 @@
 						</p:column>					
 						</p:dataTable>
 					</h:form>
+			</p:tab>	
+			<p:tab title="Registrar pagamento" id="registro_pagamento">
+        		<p:dataTable var="os" value="#{oSBean.oss}" id="lista_teste">
+				    <p:column headerText="CPF" filterBy="#{os.veiculo.cliente.cpf}" filterMatchMode="contains">
+				        #{os.veiculo.cliente.cpf}
+				    </p:column>
+				    
+				     <p:column headerText="Veículo" filterBy="#{os.veiculo.modelo}" filterMatchMode="contains">
+				         <h:outputText value="#{os.veiculo.modelo}" />
+				    </p:column>
+				 
+				    <p:column headerText="Serviço" filterBy="#{os.servico}">
+				       #{os.servico}
+				    </p:column>
+				 
+				    <p:column headerText="Data do serviço">
+				        <h:outputText value="#{os.dataServico.time}">
+				        	  <f:convertDateTime pattern="dd/MM/yyyy" timeStyle="short"/>
+				        </h:outputText>
+				    </p:column>
+				 
+				    <p:column headerText="Data do orçamento">
+				        <h:outputText value="#{os.dataOrcamento.time}">
+				        	  <f:convertDateTime pattern="dd/MM/yyyy" timeStyle="short"/>
+				        </h:outputText>
+				    </p:column>
+				    
+				    <p:column headerText="Valor">
+				        <h:outputText value="#{os.valor}" />
+				    </p:column>
+				    
+				    <p:column headerText="Status">
+				        <h:outputText value="#{os.status}" />
+				    </p:column>
+				    
+				    <p:column headerText="Açao">
+				    	<h:form>
+				        <h:commandLink value="Pagar" action="#{oSBean.atualizaStatus(os,'Pagar')}" styleClass="btn btn-warning">
+							</h:commandLink>
+							</h:form>
+				    </p:column>
+			</p:dataTable>
 			</p:tab>	
 			<p:tab title="Remover Cliente" id="remover_clientes">
 				<!-- Listagem com os clientes cadastrados -->

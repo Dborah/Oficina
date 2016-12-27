@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import oficinaMecanica.dao.DAO;
+import oficinaMecanica.dao.OrdemServicoDAO;
 import oficinaMecanica.modelo.OrdemServico;
 
 @SessionScoped
@@ -14,6 +15,7 @@ import oficinaMecanica.modelo.OrdemServico;
 public class OSBean {
 	OrdemServico os = new OrdemServico();
 	private List<OrdemServico> oss;
+	private List<OrdemServico> oss_status;
 
 	public OrdemServico getOs() {
 		return os;
@@ -45,6 +47,14 @@ public class OSBean {
 		return oss;
 	}
 	
+	public void buscarOS(String status) {
+		oss_status = new OrdemServicoDAO().getByVeiculo(status);
+}
+	public List<OrdemServico> getOss_status() {
+			return oss_status;
+
+	}
+
 	public void atualizaStatus(OrdemServico os,String status){
 		DAO<OrdemServico> dao = new DAO<>(OrdemServico.class);
 		os.setStatus(status);
