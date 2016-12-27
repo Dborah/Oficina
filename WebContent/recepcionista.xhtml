@@ -20,15 +20,21 @@
 					<p:messages styleClass="erros"> </p:messages>
 					<fieldset>
 						<legend>Dados do Cliente</legend>
-						
+						<div class="centralizar">
 						<h:outputLabel value="Nome" for="cliente"/>
 						<p:inputText value="#{clienteBean.cliente.nome}" id="cliente"/>
-						
-						<h:outputLabel value="Telefone" for="tel_cliente"/>
-						<p:inputMask mask="(99) 99999-9999" value="#{clienteBean.cliente.telefone}" id="tel_cliente"/>
-						
-						<h:outputLabel value="CPF" for="cpf"/>
-						<p:inputMask mask="999.999.999-99" value="#{clienteBean.cliente.cpf}" id="cpf"/>
+						<div class="ui-g">
+							<div class="ui-g-6">
+							<h:outputLabel value="Telefone" for="tel_cliente"/>
+							<p:inputMask mask="(99) 99999-9999" value="#{clienteBean.cliente.telefone}" id="tel_cliente"/>
+							
+							</div>
+							<div class="ui-g-6">
+							<h:outputLabel value="CPF" for="cpf"/>
+							<p:inputMask mask="999.999.999-99" value="#{clienteBean.cliente.cpf}" id="cpf"/>
+							
+						</div>
+						</div>
 						
 						<h:outputLabel value="E-mail" for="email"/>
 						<p:inputText value="#{clienteBean.cliente.email}" id="email"/>
@@ -42,7 +48,8 @@
 						</h:commandButton>
 						<h:commandButton action="#{clienteBean.cancela}" value="Cancelar">
 							<f:ajax execute="@form" render=":dados_recepcionista:clientes"/>
-						</h:commandButton>										
+						</h:commandButton>	
+						</div>									
 					</fieldset>
 				</h:form>
 				
@@ -277,7 +284,7 @@
           	<h:form id="lista_oss">
 					<p:messages styleClass="erros"></p:messages>
 					<h2>Ordens de Serviço</h2>
-					<p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="4" rowStyleClass="#{os.status != 'Criada' ? 'ui-helper-hidden' : ''}">
+					<p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="10" rowStyleClass="#{os.status != 'Criada' ? 'ui-helper-hidden' : ''}">
 						<p:column>
 							<f:facet name="header">Veículo</f:facet>
 							<h:outputText value="#{os.veiculo.modelo}"/>

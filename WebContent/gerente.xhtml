@@ -15,7 +15,7 @@
 					<h:form id="lista_oss">	
 						<p:messages styleClass="erros"></p:messages>
 						 <h2>Concluir OS</h2>
-						 <p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="4" rowStyleClass="#{os.status != 'Aprovada' ? 'ui-helper-hidden' : ''}">
+						 <p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="10" rowStyleClass="#{os.status != 'Aprovada' ? 'ui-helper-hidden' : ''}">
 							<p:column>
 							<f:facet name="header">Veículo</f:facet>
 							<h:outputText value="#{os.veiculo.modelo}"/>
@@ -44,7 +44,6 @@
 							<f:facet name="header">Açao</f:facet>
 							<h:commandLink value="Concluída" action="#{oSBean.atualizaStatus(os,'Concluída')}" styleClass="btn btn-warning">
 								<f:setPropertyActionListener value="#{os}" target="#{oSBean.os}"/>
-								<f:ajax execute="@form" render=":dados_gerente:lista_oss"/>
 							</h:commandLink>
 						</p:column>					
 						</p:dataTable>
@@ -52,7 +51,7 @@
 			</p:tab>	
 			<p:tab title="Registrar pagamento">
 				<h:form id="registro_pagamento">
-        		<p:dataTable value="#{oSBean.oss}" var="os" id="lista_teste"  rowStyleClass="#{os.status != 'Concluída' ? 'ui-helper-hidden' : ''}">
+        		<p:dataTable value="#{oSBean.oss}" var="os" id="lista_teste" rows="10" paginator="true" rowStyleClass="#{os.status != 'Concluída' ? 'ui-helper-hidden' : ''}">
 				    <p:column headerText="CPF" filterBy="#{os.veiculo.cliente.cpf}" filterMatchMode="contains">
 				        #{os.veiculo.cliente.cpf}
 				    </p:column>
@@ -92,7 +91,54 @@
 				    </p:column>
 			</p:dataTable>
 			</h:form>
-			</p:tab>	
+			</p:tab>
+			<p:tab title="OS Pagas">
+				<h:form id="ros_pagas">
+        		<p:dataTable value="#{oSBean.oss}" var="os" id="lista_teste" rows="10" paginator="true">
+				    <p:column headerText="CPF" filterBy="#{os.veiculo.cliente.cpf}" filterMatchMode="contains">
+				        #{os.veiculo.cliente.cpf}
+				    </p:column>
+				    
+				     <p:column headerText="Veículo" filterBy="#{os.veiculo.modelo}" filterMatchMode="contains">
+				         <h:outputText value="#{os.veiculo.modelo}" />
+				    </p:column>
+				 
+				    <p:column headerText="Serviço" filterBy="#{os.servico}">
+				       #{os.servico}
+				    </p:column>
+				 
+				    <p:column headerText="Data do serviço">
+				        <h:outputText value="#{os.dataServico.time}">
+				        	  <f:convertDateTime pattern="dd/MM/yyyy" timeStyle="short"/>
+				        </h:outputText>
+				    </p:column>
+				 
+				    <p:column headerText="Data do orçamento">
+				        <h:outputText value="#{os.dataOrcamento.time}">
+				        	  <f:convertDateTime pattern="dd/MM/yyyy" timeStyle="short"/>
+				        </h:outputText>
+				    </p:column>
+				    
+				    <p:column headerText="Valor">
+				        <h:outputText value="#{os.valor}" />
+				    </p:column>
+				    
+				    <p:column headerText="Status">
+				        <h:outputText value="#{os.status}" />
+				    </p:column>
+				    <p:summaryRow>
+            <p:column colspan="3" style="text-align:right">
+                <h:outputText value="Total:" />
+            </p:column>
+            <p:column>
+                <h:outputText value="#{os.valor}">
+                    <f:convertNumber type="currency" currencySymbol="$" />
+                </h:outputText>
+            </p:column>
+        </p:summaryRow>
+			</p:dataTable>
+			</h:form>
+			</p:tab>		
 			<p:tab title="Remover Cliente" id="remover_clientes">
 				<!-- Listagem com os clientes cadastrados -->
 				<h:form id="lista_clientes">
