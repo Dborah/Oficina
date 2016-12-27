@@ -86,11 +86,9 @@
 				    </p:column>
 				    
 				    <p:column headerText="Açao">
-				    	<h:form>
 				        	<h:commandLink value="Pagar" action="#{oSBean.atualizaStatus(os,'Paga')}" styleClass="btn btn-warning">
 				        		<f:setPropertyActionListener value="#{os}" target="#{oSBean.os}"/>
 							</h:commandLink>
-							</h:form>
 				    </p:column>
 			</p:dataTable>
 			</h:form>

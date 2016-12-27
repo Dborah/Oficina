@@ -111,7 +111,7 @@
 							
 		
 							<h:commandButton action="#{pecaBean.gravar()}" value="Gravar" >
-								<!--  <f:setPropertyActionListener value="#{pecaBean.peca}" target="#{veiculoBean.veiculo.cliente}"/>-->  
+								<f:setPropertyActionListener value="#{pecaBean.peca}" target="#{veiculoBean.veiculo.cliente}"/>
 								<f:ajax execute="@form" render=":dados_mecanico:pecas :dados_mecanico:lista_pecas"/> 
 							</h:commandButton>
 							<h:commandButton action="#{pecaBean.cancela()}" value="Cancelar">
