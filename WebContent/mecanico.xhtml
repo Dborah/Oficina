@@ -51,7 +51,7 @@
 							</p:column>							
 						</p:dataTable>
 					</h:form>
-				<!--  Dados dos usuários -->
+				<!--  Dados do orçamento -->
 				<h:form id="os">
 					<h2>
 					   <h:outputText value="Realizar orçamento" rendered="#{empty usuarioBean.usuario.idusuario}" />
@@ -66,15 +66,15 @@
 						<h:outputLabel value="Valor" for="valor"/>
 						<p:inputText id="valor" value="#{oSBean.os.valor}"/>
 						
-						<!--  <h:outputLabel value="Id Veiculo" for="id_veiculo"/>-->
 						<p:inputText type="hidden" value="#{oSBean.os.veiculo.id}" id="id_veiculo"/>
 						
 						<h:outputLabel value="Placa do veiculo" for="placa_veiculo"/>
 						<p:inputText  value="#{oSBean.os.veiculo.placa}" id="placa_veiculo"/>
 						
+						
 						<h:commandButton action="#{oSBean.gravar()}" value="Gravar" >
-							<!--  <f:setPropertyActionListener value="#{oSBean.os}" target="#{oSBean.os.veiculo.id}"/>-->
-							<!--  <f:ajax execute="@form" render=":dados_mecanico:os :dados_mecanico:lista_veiculos"/>-->
+								
+							    <f:ajax execute="@form" render=":dados_mecanico:os :dados_mecanico:lista_veiculos"/>
 						</h:commandButton>
 						<h:commandButton action="#{usuarioBean.cancela()}" value="Cancelar">
 							<!-- ><f:ajax execute="@form" render=":dados_administrador:users"/> -->
@@ -88,8 +88,7 @@
 				<!-- Dados das peças -->
 				<h:form id="pecas">
 					<h2>
-						<h:outputText value="Cadastrar Peças" rendered="#{empty pecaBean.peca.id}" />
-						<h:outputText value="Editar Pecas" rendered="#{not empty pecaBean.peca.id}" />
+						Retirar peças
 					</h2>
 					<p:messages styleClass="erros"></p:messages>
 					<fieldset>	
@@ -97,14 +96,6 @@
 						<h:outputLabel value="Nome" for="nome"/>
 							<p:inputText value="#{pecaBean.peca.nome}" id="nome"/>
 			
-							<h:outputLabel value="Fornecedor" for="fornecedor"/>
-							<p:inputText value="#{pecaBean.peca.fornecedor}" id="fornecedor"/>
-							
-							<h:outputLabel value="Tipo" for="tipo"/>
-							<p:inputText value="#{pecaBean.peca.tipo}" id="tipo"/>
-							
-							<h:outputLabel value="Marca" for="marca"/>
-							<p:inputText value="#{pecaBean.peca.marca}" id="marca"/>
 							
 							<h:outputLabel value="Quantidade" for="quantidade"/>
 							<p:inputText value="#{pecaBean.peca.quantidade}" id="quantidade"/>
