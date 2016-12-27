@@ -37,7 +37,11 @@
 						</div>
 						
 						<h:outputLabel value="E-mail" for="email"/>
-						<p:inputText value="#{clienteBean.cliente.email}" id="email"/>
+						<p:inputText value="#{clienteBean.cliente.email}" id="email"
+							 requiredMessage="Por favor entre com seu endereço de e-mail."
+							 validatorMessage="Formato de e-mail inválido.">					 
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />				
+                        </p:inputText>
 						
 						<h:outputLabel value="Endereço" for="endereco"/>
 						<p:inputTextarea value="#{clienteBean.cliente.endereco}" id="endereco"></p:inputTextarea>
@@ -77,6 +81,11 @@
 						<p:column>
 							<f:facet name="header">Endereço</f:facet>
 							<h:outputText value="#{cliente.endereco}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Email</f:facet>
+							<h:outputText value="#{cliente.email}"/>
 						</p:column>
 						
 						<p:column>

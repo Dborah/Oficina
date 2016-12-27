@@ -22,4 +22,13 @@
   	<param-name>primefaces.THEME</param-name>
   	<param-value>bluesky</param-value>
   </context-param>
+  
+   <error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/login.xhtml</location>
+	</error-page>
+  
+    <session-config>
+        <session-timeout>2</session-timeout>
+	</session-config>
 </web-app>
