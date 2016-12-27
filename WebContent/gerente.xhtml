@@ -16,10 +16,9 @@
 						<p:messages styleClass="erros"></p:messages>
 						 <h2>Concluir OS</h2>
 						 <p:dataTable value="#{oSBean.oss}" var="os" paginator="true" rows="10" rowStyleClass="#{os.status != 'Aprovada' ? 'ui-helper-hidden' : ''}">
-							<p:column>
-							<f:facet name="header">Veículo</f:facet>
-							<h:outputText value="#{os.veiculo.modelo}"/>
-						</p:column>
+							 <p:column headerText="Veículo" filterBy="#{os.veiculo.modelo}" filterMatchMode="contains">
+				         <h:outputText value="#{os.veiculo.modelo}" />
+				    </p:column>
 						<p:column>
 							<f:facet name="header">Serviço</f:facet>
 							<h:outputText value="#{os.servico}"/>
@@ -126,16 +125,7 @@
 				    <p:column headerText="Status">
 				        <h:outputText value="#{os.status}" />
 				    </p:column>
-				    <p:summaryRow>
-            <p:column colspan="3" style="text-align:right">
-                <h:outputText value="Total:" />
-            </p:column>
-            <p:column>
-                <h:outputText value="#{os.valor}">
-                    <f:convertNumber type="currency" currencySymbol="$" />
-                </h:outputText>
-            </p:column>
-        </p:summaryRow>
+				    
 			</p:dataTable>
 			</h:form>
 			</p:tab>		

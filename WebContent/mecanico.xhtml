@@ -16,20 +16,17 @@
 						<p:messages styleClass="erros"></p:messages>
 						 <h2>Veiculos Cadastrados</h2>
 						 <p:dataTable value="#{veiculoBean.veiculos}" var="veiculo" paginator="true" rows="4">
-							<p:column>
-								<f:facet name="header">Marca</f:facet>
-								<h:outputText value="#{veiculo.marca}"/>
-							</p:column>
+							<p:column headerText="Marca" filterBy="#{veiculo.marca}" filterMatchMode="contains">
+				         		<h:outputText value="#{veiculo.marca}" />
+				    		</p:column>
 							
-							<p:column>
-								<f:facet name="header">Modelo</f:facet>
-								<h:outputText value="#{veiculo.modelo}"/>
-							</p:column>
+							<p:column headerText="Modelo" filterBy="#{veiculo.modelo}" filterMatchMode="contains">
+				         		<h:outputText value="#{veiculo.modelo}" />
+				    		</p:column>
 							
-							<p:column>
-								<f:facet name="header">Placa</f:facet>
-								<h:outputText value="#{veiculo.placa}"/>
-							</p:column>
+							<p:column headerText="Placa" filterBy="#{veiculo.placa}" filterMatchMode="contains">
+				         		<h:outputText value="#{veiculo.placa}" />
+				    		</p:column>
 							
 							
 							<p:column>

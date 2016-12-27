@@ -63,15 +63,13 @@
 					<h2>Clientes Cadastrados</h2>
 					
 					<p:dataTable value="#{clienteBean.clientes}" var="cliente" paginator="true" rows="4">
-						<p:column>
-							<f:facet name="header">Nome</f:facet>
-							<h:outputText value="#{cliente.nome}"/>
-						</p:column>
+						 <p:column headerText="Nome" filterBy="#{cliente.nome}" filterMatchMode="contains">
+				         	<h:outputText value="#{cliente.nome}" />
+				    	</p:column>
 						
-						<p:column>
-							<f:facet name="header">CPF</f:facet>
-							<h:outputText value="#{cliente.cpf}"/>
-						</p:column>
+						<p:column headerText="Cpf" filterBy="#{cliente.cpf}" filterMatchMode="contains">
+				         	<h:outputText value="#{cliente.cpf}" />
+				    	</p:column>
 						
 						<p:column>
 							<f:facet name="header">Telefone</f:facet>
@@ -159,10 +157,9 @@
 						<p:messages styleClass="erros"></p:messages>
 						 <h2>Veiculos Cadastrados</h2>
 						 <p:dataTable value="#{veiculoBean.veiculos}" var="veiculo" paginator="true" rows="4">
-							<p:column>
-								<f:facet name="header">Marca</f:facet>
-								<h:outputText value="#{veiculo.marca}"/>
-							</p:column>
+							<p:column headerText="Marca" filterBy="#{veiculo.marca}" filterMatchMode="contains">
+				         	<h:outputText value="#{veiculo.marca}" />
+				    	</p:column>
 							
 							<p:column>
 								<f:facet name="header">Modelo</f:facet>
@@ -246,10 +243,9 @@
 					<p:messages styleClass="erros"></p:messages>
 					<h2>Pecas Cadastradas</h2>
 					<p:dataTable value="#{pecaBean.pecas}" var="peca" paginator="true" rows="4">
-						<p:column>
-							<f:facet name="header">Nome</f:facet>
-							<h:outputText value="#{peca.nome}"/>
-						</p:column>
+						<p:column headerText="Nome" filterBy="#{peca.nome}" filterMatchMode="contains">
+				         	<h:outputText value="#{peca.nome}" />
+				    	</p:column>
 						
 						<p:column>
 							<f:facet name="header">Fornecedor</f:facet>
