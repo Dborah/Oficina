@@ -73,7 +73,6 @@
 						
 						
 						<h:commandButton action="#{oSBean.gravar()}" value="Gravar" >
-								
 							    <f:ajax execute="@form" render=":dados_mecanico:os :dados_mecanico:lista_veiculos"/>
 						</h:commandButton>
 						<h:commandButton action="#{usuarioBean.cancela()}" value="Cancelar">
@@ -102,7 +101,6 @@
 							
 		
 							<h:commandButton action="#{pecaBean.gravar()}" value="Gravar" >
-								<f:setPropertyActionListener value="#{pecaBean.peca}" target="#{veiculoBean.veiculo.cliente}"/>
 								<f:ajax execute="@form" render=":dados_mecanico:pecas :dados_mecanico:lista_pecas"/> 
 							</h:commandButton>
 							<h:commandButton action="#{pecaBean.cancela()}" value="Cancelar">
@@ -116,8 +114,7 @@
 					<p:messages styleClass="erros"></p:messages>
 					<h2>Pecas Cadastradas</h2>
 					<p:dataTable value="#{pecaBean.pecas}" var="peca" paginator="true" rows="4">
-						<p:column>
-							<f:facet name="header">Nome</f:facet>
+						 <p:column headerText="Nome" filterBy="#{peca.nome}" filterMatchMode="contains">
 							<h:outputText value="#{peca.nome}"/>
 						</p:column>
 						
